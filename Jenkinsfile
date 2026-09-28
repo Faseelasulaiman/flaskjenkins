@@ -3,29 +3,17 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
-        stage('Install Dependencies') {
+        stage('Install') {
             steps {
                 bat 'python -m pip install -r requirements.txt'
             }
         }
 
-        stage('Run Tests') {
+        stage('Test') {
             steps {
                 bat 'python -m pytest'
             }
         }
 
-        stage('Run Application') {
-            steps {
-                bat 'python app.py'
-            }
-        }
     }
 }
-
