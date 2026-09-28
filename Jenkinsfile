@@ -1,24 +1,32 @@
+```groovy
 pipeline {
     agent any
 
     stages {
 
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
-                sh 'python3 -m pip install -r requirements.txt --break-system-packages'
+                bat 'python -m pip install -r requirements.txt'
             }
         }
 
-        stage('Test') {
+        stage('Run Tests') {
             steps {
-                sh 'python3 -m pytest'
+                bat 'python -m pytest'
             }
         }
 
-        stage('Build') {
+        stage('Run Application') {
             steps {
-                sh 'python3 -m py_compile app.py'
+                bat 'python app.py'
             }
         }
     }
 }
+```
